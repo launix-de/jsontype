@@ -1,0 +1,12 @@
+{
+ "name": "jsontype",
+ "description": "JSON validator",
+ "tags": ["json", "type", "data type"],
+ "version": "0.9",
+ "author": "Carl-Philip Hänsch <cphaensch@gmail.com>",
+ "main": "jsontype.js",
+ "scripts": {
+	 "test": "node runtests.js"
+ }
+
+}
