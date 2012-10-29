@@ -70,15 +70,16 @@ makeValidator = function(type) {
 				i++
 			}
 			var fn = makeValidator(rest.slice(0, i));
-			r = /^\w*\?$/.exec(ident);
-			if(r) {
+			r = /^(\w*)\?$/.exec(ident);
+			if(r) (function(fn){
 				ident = r[1];
 				// also check optional fields
 				if(r) types[ident] = function(value) {
 					if(value == undefined) return true;
 					return fn(value); // type must either be correct or undefined
 				}
-			} else types[ident] = fn;
+			})(fn);
+			else types[ident] = fn;
 			content = rest.slice(i+1); // everything behind the comma
 		}
 		return function(value) {
@@ -90,7 +91,7 @@ makeValidator = function(type) {
 					// whitelist-check
 					for(var j in value) {
 						// a unknown property which does not fit the wanted *-type
-						if(!types[j] && !types['*'](value[j])) return false;
+						if((!types[j]) && (!types['*'](value[j]))) return false;
 					}
 				} else {
 					if(!types[i](value[i])) return false;

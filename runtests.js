@@ -44,6 +44,7 @@ test(makeValidator('{}')({}));
 test(makeValidator('{}')({a: 'b'}));
 test(makeValidator('{*:undefined}')({}));
 test(!makeValidator('{*:undefined}')({a: 3}));
+test(makeValidator('{a: number, *:undefined}')({a: 3}));
 
 test(makeValidator('{a: number, b: string}')({b: 'd', a: 5.7}));
 var complexvalidator = makeValidator('{a: {x: number, y: number}, b: {*: undefined}}');
@@ -51,9 +52,11 @@ test(complexvalidator({a: {x: 3, y: 6}, b: {}}));
 test(!complexvalidator({a: {x: 3, z: 6}, b: {}}));
 test(!complexvalidator({a: {x: 3, y: 6}, b: {b: 6}}));
 
-var optionalvalidator = makeValidator('{muss: number, kann?: number}');
+var optionalvalidator = makeValidator('{muss: number, kann?: number, *: undefined}');
 test(optionalvalidator({muss: 1, kann: 4}));
 test(optionalvalidator({muss: 1}));
+test(!optionalvalidator({muss: 1, kann: '4'}));
+test(!optionalvalidator({muss: 1, kann: 4, zusatz: 'x'}));
 test(!optionalvalidator({kann: 4}));
 test(!optionalvalidator({}));
 test(!optionalvalidator(2));
