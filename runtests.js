@@ -62,5 +62,21 @@ test(!optionalvalidator({}));
 test(!optionalvalidator(2));
 test(!optionalvalidator([1, 2, 3]));
 
+test(!makeValidator('{*: undefined}')({x: 2}));
+test(makeValidator('{"a": string}')({a: 'test'}));
+
+
+var fixedstringvalidator = makeValidator('{"action": "fire", par: number}');
+test(fixedstringvalidator({action: 'fire', par: 2}));
+test(!fixedstringvalidator({action: 'stop', par: 2}));
+test(!fixedstringvalidator({action: 'fire'}));
+test(!fixedstringvalidator({action: 'fire', par: 'a'}));
+test(!fixedstringvalidator({action: {}, par: 2}));
+test(!fixedstringvalidator({par: 2}));
+
+
+
+
+
 
 console.log('Tests: '+testPositive+'/'+testSum);

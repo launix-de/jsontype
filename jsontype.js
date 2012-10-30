@@ -31,6 +31,12 @@ makeValidator = function(type) {
 			return value != undefined;
 		}
 	}
+	if((regex_result = /^\s*"(.*)"\s*$/.exec(type)) || (regex_result = /^\s*"(.*)"\s*$/.exec(type))) {
+		var xstring = regex_result[1];
+		return function(value) {
+			return value == xstring;
+		}
+	}
 	if(regex_result = /^\s*\[(.+)\]\s*$/.exec(type)) {
 		// array-of-match
 		var subtype = makeValidator(regex_result[1]);
@@ -48,7 +54,17 @@ makeValidator = function(type) {
 		var content = regex_result[1];
 		var types = {}; // associative list of type restrictions
 		while(!/^\s*$/.test(content)) {
-			var r = /^\s*(\w*\??|\*)\s*:(.*)$/.exec(content);
+			var optional = false;
+			var r = /^\s*(\w+)\?\s*:(.*)$/.exec(content);
+			if(!r) r = /^\s*"(.+)"\?\s*:(.*)$/.exec(content);
+			if(!r) r = /^\s*'(.+)'\?\s*:(.*)$/.exec(content);
+			if(r) optional = true;
+			else {
+				if(!r) r = /^\s*"(.+)"\s*:(.*)$/.exec(content);
+				if(!r) r = /^\s*'(.+)'\s*:(.*)$/.exec(content);
+				// TODO: do better parsing of " escape
+				if(!r) r = /^\s*(\w+|\*)\s*:(.*)$/.exec(content);
+			}
 			if(!r) throw "Error in object type syntax near: "+content;
 			var ident = r[1]; // Identifier of the property
 			var rest = r[2]; // type, optional comma and rest
@@ -70,11 +86,9 @@ makeValidator = function(type) {
 				i++
 			}
 			var fn = makeValidator(rest.slice(0, i));
-			r = /^(\w*)\?$/.exec(ident);
-			if(r) (function(fn){
-				ident = r[1];
+			if(optional) (function(fn){
 				// also check optional fields
-				if(r) types[ident] = function(value) {
+				types[ident] = function(value) {
 					if(value == undefined) return true;
 					return fn(value); // type must either be correct or undefined
 				}
