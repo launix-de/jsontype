@@ -120,3 +120,9 @@ makeValidator = function(type) {
 
 
 exports.makeValidator = makeValidator;
+exports.makeThrowValidator = function(type) {
+	var vali = makeValidator(type);
+	return function(value) {
+		if(!vali(value)) throw "data format not matched";
+	}
+}
