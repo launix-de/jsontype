@@ -74,7 +74,7 @@ test(!fixedstringvalidator({action: 'fire', par: 'a'}));
 test(!fixedstringvalidator({action: {}, par: 2}));
 test(!fixedstringvalidator({par: 2}));
 
-
+test(makeValidator('{"action": "fire", "par": number, "a": "b"}')({action: "fire", par: 3, a: "b"}));
 
 
 

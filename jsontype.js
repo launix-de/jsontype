@@ -56,12 +56,12 @@ makeValidator = function(type) {
 		while(!/^\s*$/.test(content)) {
 			var optional = false;
 			var r = /^\s*(\w+)\?\s*:(.*)$/.exec(content);
-			if(!r) r = /^\s*"(.+)"\?\s*:(.*)$/.exec(content);
-			if(!r) r = /^\s*'(.+)'\?\s*:(.*)$/.exec(content);
+			if(!r) r = /^\s*"(.+?)"\?\s*:(.*)$/.exec(content);
+			if(!r) r = /^\s*'(.+?)'\?\s*:(.*)$/.exec(content);
 			if(r) optional = true;
 			else {
-				if(!r) r = /^\s*"(.+)"\s*:(.*)$/.exec(content);
-				if(!r) r = /^\s*'(.+)'\s*:(.*)$/.exec(content);
+				if(!r) r = /^\s*"(.+?)"\s*:(.*)$/.exec(content);
+				if(!r) r = /^\s*'(.+?)'\s*:(.*)$/.exec(content);
 				// TODO: do better parsing of " escape
 				if(!r) r = /^\s*(\w+|\*)\s*:(.*)$/.exec(content);
 			}
