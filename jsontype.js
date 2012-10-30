@@ -32,6 +32,7 @@ makeValidator = function(type) {
 		}
 	}
 	if((regex_result = /^\s*"(.*)"\s*$/.exec(type)) || (regex_result = /^\s*"(.*)"\s*$/.exec(type))) {
+		// match constant string
 		var xstring = regex_result[1];
 		return function(value) {
 			return value == xstring;
