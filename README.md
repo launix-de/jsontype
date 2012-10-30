@@ -10,6 +10,7 @@ Syntax
 string - only accepts string
 "abc" - only accepts string with exactly this content
 number - only accepts numbers
+boolean - only accepts true or false
 undefined - only accepts undefined (a object entry must not be defined)
 * - accepts everything but undefined values
 [type] - accepts only arrays of that specified subtype

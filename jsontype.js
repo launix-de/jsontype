@@ -19,6 +19,12 @@ makeValidator = function(type) {
 			return typeof(value) == 'number';
 		}
 	}
+	if(/^\s*boolean\s*$/.test(type)) {
+		// type is boolean
+		return function(value) {
+			return typeof(value) == 'boolean';
+		}
+	}
 	if(/^\s*undefined\s*$/.test(type)) {
 		// check for undefined
 		return function(value) {

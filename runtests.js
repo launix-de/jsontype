@@ -21,6 +21,11 @@ test(numbervalidator(3));
 test(!numbervalidator('4'));
 test(!numbervalidator(function(){}));
 
+var booleanvalidator = makeValidator(' boolean   	');
+test(booleanvalidator(true));
+test(booleanvalidator(false));
+test(!booleanvalidator(0));
+
 var anyvalidator = makeValidator('*');
 test(anyvalidator(6));
 test(anyvalidator(''));
