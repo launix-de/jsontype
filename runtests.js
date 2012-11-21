@@ -26,6 +26,12 @@ test(booleanvalidator(true));
 test(booleanvalidator(false));
 test(!booleanvalidator(0));
 
+var functionvalidator = makeValidator('function');
+test(!functionvalidator(3));
+test(!functionvalidator({}));
+test(functionvalidator(function(){}));
+test(functionvalidator(function(x){foo.bar}));
+
 var anyvalidator = makeValidator('*');
 test(anyvalidator(6));
 test(anyvalidator(''));
@@ -52,10 +58,18 @@ test(!makeValidator('{*:undefined}')({a: 3}));
 test(makeValidator('{a: number, *:undefined}')({a: 3}));
 
 test(makeValidator('{a: number, b: string}')({b: 'd', a: 5.7}));
-var complexvalidator = makeValidator('{a: {x: number, y: number}, b: {*: undefined}}');
-test(complexvalidator({a: {x: 3, y: 6}, b: {}}));
-test(!complexvalidator({a: {x: 3, z: 6}, b: {}}));
-test(!complexvalidator({a: {x: 3, y: 6}, b: {b: 6}}));
+var complexvalidator = makeValidator('{a: {"x": number, \'y\': number}, b: {*: undefined}, \'c\': foo, d?: bar}', 
+	{
+		foo: function(value){return stringvalidator(value) && /foo/.test(value)},
+		bar: function(value){return false}
+	});
+test(complexvalidator({a: {x: 3, y: 6}, b: {}, c: 'foo'}));
+test(!complexvalidator({a: {x: 3, z: 6}, b: {}, c: 'foo'}));
+test(!complexvalidator({a: {x: 3, y: 6}, b: {b: 6}, c: 'foo'}));
+test(complexvalidator({a: {x: 3, y: 6}, b: {}, c: 'lal foo foo x'}));
+test(!complexvalidator({a: {x: 3, y: 6}, b: {}, c: 'foo', d: 4}));
+test(!complexvalidator({a: {x: 3, y: 6}, b: {}, c: 'bar'}));
+test(!complexvalidator({a: {x: 3, y: 6}, b: {}, c: {foo: 'foo'}}));
 
 var optionalvalidator = makeValidator('{muss: number, kann?: number, *: undefined}');
 test(optionalvalidator({muss: 1, kann: 4}));

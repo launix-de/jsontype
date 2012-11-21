@@ -3,7 +3,8 @@ Module jsontype.js
 
 */
 
-var makeValidator = function(type) {
+// {type: string, additionaltypes: {*: function}
+var makeValidator = function(type, additionaltypes) {
 	var regex_result;
 
 	// Input: string
@@ -25,6 +26,12 @@ var makeValidator = function(type) {
 			return typeof(value) == 'boolean';
 		}
 	}
+	if(/^\s*function\s*$/.test(type)) {
+		// type is boolean
+		return function(value) {
+			return typeof(value) == 'function';
+		}
+	}
 	if(/^\s*undefined\s*$/.test(type)) {
 		// check for undefined
 		return function(value) {
@@ -37,6 +44,14 @@ var makeValidator = function(type) {
 			return value !== undefined;
 		};
 	}
+	if(additionaltypes) {
+		// Match von nutzerdefinierten Namen
+		regex_result = /^\s*(.*?)\s*$/.exec(type);
+		if(regex_result && additionaltypes[regex_result[1]]) {
+			return additionaltypes[regex_result[1]];
+		}
+	}
+
 	if((regex_result = /^\s*"(.*)"\s*$/.exec(type)) || (regex_result = /^\s*"(.*)"\s*$/.exec(type))) {
 		// match constant string
 		var xstring = regex_result[1];
@@ -46,7 +61,7 @@ var makeValidator = function(type) {
 	}
 	if((regex_result = /^\s*\[(.+)\]\s*$/.exec(type))) {
 		// array-of-match
-		var subtype = makeValidator(regex_result[1]);
+		var subtype = makeValidator(regex_result[1], additionaltypes);
 		return function(value) {
 			if(typeof(value) !== 'object') return false;
 			if(value.constructor !== Array) return false;
@@ -92,7 +107,7 @@ var makeValidator = function(type) {
 				}
 				i++;
 			}
-			var fn = makeValidator(rest.slice(0, i));
+			var fn = makeValidator(rest.slice(0, i), additionaltypes);
 			if(optional) (function(fn){
 				// also check optional fields
 				types[ident] = function(value) {
