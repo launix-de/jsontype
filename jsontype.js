@@ -142,8 +142,8 @@ var makeValidator = function(type, additionaltypes) {
 
 
 exports.makeValidator = makeValidator;
-exports.makeThrowValidator = function(type) {
-	var vali = makeValidator(type);
+exports.makeThrowValidator = function(type, additionaltypes) {
+	var vali = makeValidator(type, additionaltypes);
 	return function(value) {
 		if(!vali(value)) throw "data format not matched";
 	};
