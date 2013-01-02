@@ -47,8 +47,15 @@ var makeValidator = function(type, additionaltypes) {
 	if(additionaltypes) {
 		// Match von nutzerdefinierten Namen
 		regex_result = /^\s*(.*?)\s*$/.exec(type);
-		if(regex_result && additionaltypes[regex_result[1]]) {
-			return additionaltypes[regex_result[1]];
+		if(regex_result && additionaltypes.hasOwnProperty(regex_result[1])) {
+			var fn = additionaltypes[regex_result[1]];
+			return function(value) {
+				try {
+					return fn(value);
+				} catch(x) {
+					return false;
+				}
+			};
 		}
 	}
 
@@ -119,6 +126,7 @@ var makeValidator = function(type, additionaltypes) {
 			content = rest.slice(i+1); // everything behind the comma
 		}
 		return function(value) {
+			if(!value) return false;
 			// validate complex object structures
 			if(typeof(value) !== 'object') return false;
 			// for all definitions:
