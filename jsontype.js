@@ -14,6 +14,12 @@ var makeValidator = function(type, additionaltypes) {
 			return typeof(value) === 'string';
 		};
 	}
+	if(/^\s*mail\s*$/.test(type)) {
+		// type is email
+		return function(value) {
+			return typeof(value) === 'string' && /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value);
+		};
+	}
 	if(/^\s*number\s*$/.test(type)) {
 		// type is number
 		return function(value) {

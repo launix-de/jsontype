@@ -16,6 +16,15 @@ test(stringvalidator('abc'));
 test(!stringvalidator(123));
 test(!stringvalidator({}));
 
+var mailvalidator = makeValidator('	mail\t');
+test(mailvalidator('carlo@gmx.net'));
+test(mailvalidator('carlo.kater@gmx.net'));
+test(mailvalidator('carlo-kater@gmx.net'));
+test(mailvalidator('carlo@gmx.net.to'));
+test(!mailvalidator('@gmx.net'));
+test(!mailvalidator('carlo.net'));
+test(!mailvalidator('carlo@gmx'));
+
 var numbervalidator = makeValidator('number   	');
 test(numbervalidator(3));
 test(!numbervalidator('4'));
