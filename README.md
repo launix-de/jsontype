@@ -6,7 +6,9 @@ jsontype allows data layout assertions for JSON datastructures.
 Syntax
 ======
 
+`*` - accepts everything but undefined values
 <pre>
+* - accepts everything but undefined values
 string - only accepts string
 mail - only accepts strings that are formed like an email
 "abc" - only accepts string with exactly this content
@@ -14,10 +16,13 @@ number - only accepts numbers
 boolean - only accepts true or false
 function - only accepts a function
 undefined - only accepts undefined (a object entry must not be defined)
-* - accepts everything but undefined values
+
+[ * ] - accepts any array
 [type] - accepts only arrays of that specified subtype
+
 {name: type, name: type} - accepts only objects that have these properties with exactly these types
 {name: type, * : undefined} - accepts only objects that have no other properties than the named ones
+{ * : type} - accepts only objects where all properties have the specified subtype
 {name?: type} - accepts only objects that dont have this named property or the property has the specified type
 {"name": type} - accepts only objects which have this named property with exactly this type
 </pre>
