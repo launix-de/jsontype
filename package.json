@@ -1,6 +1,6 @@
 {
   "name": "jsontype",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A small library that takes JSON structure descriptions and creates a function that validates if a javascript value is in exactly this structure.",
   "main": "jsontype.js",
   "scripts": {
