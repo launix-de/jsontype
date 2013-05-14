@@ -33,14 +33,20 @@ Using jsontype
 	}
 ```
 
-You can also define your own types like
+You can also define your own types as regexp or function like
 
 ```javascript
 	function validatePassword(value) {
 		// Password criteria
 		return typeof(value) === 'string' && value.length >= 8;
 	}
-	var validator = makeValidator('{username: string, password: pwstring}', {pwstring: validatePassword});
+	// we define two additional validators
+	// identifier forces strings via regexp to begin with a alphanumerical character
+	// pwstring forces strings via function to be at least 8 characters strong
+	var validator = makeValidator('{username: identifier, password: pwstring}', {
+		identifier: /^[a-zA-Z_][a-zA-Z_0-9]*$/,
+		pwstring: validatePassword
+	});
 	if(!validator({username: 'peter', password: '123'})) {
 		console.log('Check if your password fits the criteria');
 	}

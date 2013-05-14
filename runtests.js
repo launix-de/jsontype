@@ -117,5 +117,27 @@ test(!extravalidator({a: 3, b: {action: 'fire2', par: 2}, c: {muss: 1, kann: 4}}
 test(!extravalidator({a: 3}));
 test(!extravalidator(null));
 
+var regexvalidator = makeValidator('rx', {rx: /^a.c$/});
+test(!regexvalidator());
+test(!regexvalidator(3));
+test(!regexvalidator({}));
+test(regexvalidator('abc'));
+test(regexvalidator('a c'));
+test(!regexvalidator(' abc'));
+test(!regexvalidator('ac'));
+test(!regexvalidator('a_c '));
+test(!regexvalidator('aacc'));
+
+// Example from README.md
+function validatePassword(value) {
+  // Password criteria
+  return typeof(value) === 'string' && value.length >= 8;
+}
+var exampletest = makeValidator('{username: identifier, password: pwstring}', {identifier: /^[a-zA-Z_][a-zA-Z_0-9]*$/, pwstring: validatePassword});
+test(!exampletest({username: 'peter', password: '123'}));
+test(!exampletest({username: 'pe$er', password: '123'}));
+test(!exampletest({username: '6peer', password: '123'}));
+test(exampletest({username: 'peter', password: '12345678'}));
+
 
 console.log('Tests: '+testPositive+'/'+testSum);
