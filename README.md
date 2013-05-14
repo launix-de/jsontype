@@ -30,7 +30,8 @@ Using jsontype
 ==============
 
 ```javascript
-	var validator = makeValidator('{username: string, password: string}');
+	var jsontype = require('jsontype');
+	var validator = jsontype.makeValidator('{username: string, password: string}');
 	if(validator({username: 'peter', password: '123'})) {
 		// do something
 	}
@@ -39,6 +40,7 @@ Using jsontype
 You can also define your own types as regexp or function like
 
 ```javascript
+	var jsontype = require('jsontype');
 	function validatePassword(value) {
 		// Password criteria
 		return typeof(value) === 'string' && value.length >= 8;
@@ -46,7 +48,7 @@ You can also define your own types as regexp or function like
 	// we define two additional validators
 	// identifier forces strings via regexp to begin with a alphanumerical character
 	// pwstring forces strings via function to be at least 8 characters strong
-	var validator = makeValidator('{username: identifier, password: pwstring}', {
+	var validator = jsontype.makeValidator('{username: identifier, password: pwstring}', {
 		identifier: /^[a-zA-Z_][a-zA-Z_0-9]*$/,
 		pwstring: validatePassword
 	});
