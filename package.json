@@ -1,12 +1,20 @@
 {
- "name": "jsontype",
- "description": "JSON validator",
- "tags": ["json", "type", "data type"],
- "version": "0.9",
- "author": "Carl-Philip Hänsch <cphaensch@gmail.com>",
- "main": "jsontype.js",
- "scripts": {
-	 "test": "node runtests.js"
- }
-
+  "name": "jsontype",
+  "version": "1.0.0",
+  "description": "A small library that takes JSON structure descriptions and creates a function that validates if a javascript value is in exactly this structure.",
+  "main": "jsontype.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "keywords": [
+    "json",
+    "data",
+    "type",
+    "validation"
+  ],
+  "author": "Carl-Philip Hänsch <carli@launix.de>",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "bda1051eb05bbd0372a8c4c95ca2e07cd4f8ceff"
 }
