@@ -6,23 +6,24 @@ JSONtype is a markup language that describes JSON data layout and allows you to 
 Syntax
 ======
 
-`*` - accepts everything but undefined values
-`string` - only accepts string
-`mail` - only accepts strings that are formed like an email
-`"abc"` - only accepts string with exactly this content
-`number` - only accepts numbers
-`boolean` - only accepts true or false
-`function` - only accepts a function
-`undefined` - only accepts undefined (a object entry must not be defined)
+`*` - accepts everything but undefined values<br/>
+`string` - only accepts string<br/>
+`mail` - only accepts strings that are formed like an email<br/>
+`"abc"` - only accepts string with exactly this content<br/>
+`number` - only accepts numbers<br/>
+`boolean` - only accepts true or false<br/>
+`function` - only accepts a function<br/>
+`undefined` - only accepts undefined (a object entry must not be defined)<br/>
 
-`[*]` - accepts any array
-`[type]` - accepts only arrays of that specified subtype
+`[*]` - accepts any array<br/>
+`[type]` - accepts only arrays of that specified subtype<br/>
 
-`{name: type, name: type}` - accepts only objects that have these properties with exactly these types
-`{name: type, * : undefined}` - accepts only objects that have no other properties than the named ones
-`{*: type}` - accepts only objects where all properties have the specified subtype
-`{name?: type}` - accepts only objects that dont have this named property or the property has the specified type
-`{"name": type}` - accepts only objects which have this named property with exactly this type (be careful, the parser is not perfect)
+`{name: type, name: type}` - accepts only objects that have these properties with exactly these types<br/>
+`{name: type, * : undefined}` - accepts only objects that have no other properties than the named ones<br/>
+`{*: type}` - accepts only objects where all properties have the specified subtype<br/>
+`{name?: type}` - accepts only objects that dont have this named property or the property has the specified type<br/>
+`{"name": type}` - accepts only objects which have this named property with exactly this type (be careful, the parser is not perfect)<br/>
+
 Caution: Do not accept validation schemas from the user because they could harm you.
 
 Using jsontype
