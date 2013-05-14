@@ -4,7 +4,7 @@
   "description": "A small library that takes JSON structure descriptions and creates a function that validates if a javascript value is in exactly this structure.",
   "main": "jsontype.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node runtests.js"
   },
   "repository": "",
   "keywords": [

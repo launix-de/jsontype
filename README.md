@@ -52,3 +52,8 @@ The function returns true if the value validates okay.
 It is good practise to create all validators at startup and then just call the generated functions.
 If you want to have an exception thrown instead of a boolean return value, use makeThrowValidator.
 It will create functions that exit with undefined or throw an exception.
+
+More Examples
+=============
+
+Look into runtests.js which provides a lot of test cases that cover all features of jsontype.
