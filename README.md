@@ -3,6 +3,8 @@ Overview
 
 JSONtype is a markup language that describes JSON data layout and allows you to validate random JavaScript values. This prevents you from writing lots of try-catch blocks or to get undefined results when processing malformed user input.
 
+The JSONtype library is a schema validator library for JavaScript (mainly Node.js). It allows you to define your data structure in a compact way and create a JavaScript function from it. The validation is then just a function call.
+
 Syntax
 ======
 
