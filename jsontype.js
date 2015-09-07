@@ -55,13 +55,24 @@ var makeValidator = function(type, additionaltypes) {
 		regex_result = /^\s*(.*?)\s*$/.exec(type);
 		if(regex_result && additionaltypes.hasOwnProperty(regex_result[1])) {
 			var fn = additionaltypes[regex_result[1]];
-			return function(value) {
-				try {
-					return fn(value);
-				} catch(x) {
-					return false;
+			if(typeof(fn) === 'function') {
+				// validator functions
+				return function(value) {
+					try {
+						return fn(value);
+					} catch(x) {
+						return false;
+					}
 				}
-			};
+			} else if(typeof(fn) === 'object' && fn.constructor == RegExp) {
+				// regexp validators
+				return function(value) {
+					return typeof(value) === 'string'
+						&& value.match(fn);
+				}
+			} else {
+				throw "Unknown type of user defined validator " + regex_result[1];
+			}
 		}
 	}
 
