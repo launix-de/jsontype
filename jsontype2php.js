@@ -102,5 +102,5 @@ if (process.argv[2] && process.argv[2][0] == '$') {
 	console.log('function validate($x) {');
 	console.log('  // created from ' + str);
 	console.log('  return ' + makeValidator(str, '$x') + ';');
-	console.log(';');
+	console.log('}');
 }
