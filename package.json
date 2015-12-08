@@ -1,6 +1,6 @@
 {
   "name": "jsontype",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A small library that takes JSON structure descriptions and creates a function that validates if a javascript value is in exactly this structure.",
   "main": "jsontype.js",
   "scripts": {
@@ -16,5 +16,4 @@
   "author": "Carl-Philip Hänsch <carli@launix.de>",
   "license": "BSD",
   "readmeFilename": "README.md",
-  "gitHead": "bda1051eb05bbd0372a8c4c95ca2e07cd4f8ceff"
 }

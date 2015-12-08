@@ -22,14 +22,14 @@ Syntax
 
 `{name: type, name: type}` - accepts only objects that have these properties with exactly these types<br/>
 `{name: type, * : undefined}` - accepts only objects that have no other properties than the named ones<br/>
-`{*: type}` - accepts only objects where all properties have the specified subtype<br/>
+`{*: type}` - accepts only objects where all properties have the specified subtype (not supported in PHP, TODO?)<br/>
 `{name?: type}` - accepts only objects that dont have this named property or the property has the specified type<br/>
 `{"name": type}` - accepts only objects which have this named property with exactly this type (be careful, the parser is not perfect)<br/>
 
 Caution: Do not accept validation schemas from the user because they could harm you.
 
-Using jsontype
-==============
+Using jsontype in JavaScript and Node.js
+========================================
 
 ```javascript
 	var jsontype = require('jsontype');
@@ -65,6 +65,17 @@ The function returns `true` if the value validates successfully.
 It is good practise to create all validators at startup and then just call the generated functions.
 If you want to have an exception thrown instead of a boolean return value, use `makeThrowValidator`.
 It will create functions that exit with `undefined` or throw an exception.
+
+Using jsontype in PHP
+=====================
+
+To use jsontype in PHP, e.g. to build JSON APIs, use `jsontype2php.js`
+
+Usage:
+ - `node jsontype2php.js {username: string, password: string}` for creating a `function validate($x)`
+ - `node jsontype2php.js $foo [mail]` for creating a inline PHP statement that validates `$foo`
+
+Once you created a PHP snippet, copy+paste it into your code. This guarantees high performance and effective JSON validation.
 
 More Examples
 =============
