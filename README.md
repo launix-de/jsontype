@@ -75,6 +75,10 @@ Usage:
  - `node jsontype2php.js {username: string, password: string}` for creating a `function validate($x)`
  - `node jsontype2php.js $foo [mail]` for creating a inline PHP statement that validates `$foo`
 
+Some remarks:
+ - you might need single quotes on command line for escaping the string and double quotes for string literals inside the schema
+ - using custom types like `validate_my_regex` lead to calls to a function with the same name returning a boolean
+
 Once you created a PHP snippet, copy+paste it into your code. This guarantees high performance and effective JSON validation.
 
 More Examples
