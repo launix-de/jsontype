@@ -88,8 +88,8 @@ var makeValidator = function(type, varname) {
 		}
 		return 'isset(' + varname + ') && is_array(' + varname + ') && ' + types.join(' && ');
 	}
-	// TODO: check for OR
-	throw new Error("Unknown type identifier: " + type);
+	// else: cusom function
+	return 'isset(' + varname + ') && ' + type + '(' + varname + ')';
 };
 
 if (process.argv[2] && process.argv[2][0] == '$') {
