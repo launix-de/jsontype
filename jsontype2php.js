@@ -81,11 +81,12 @@ var makeValidator = function(type, varname) {
 				types.push(fn);
 			} else {
 				// TODO validate everything but the collected types
+				var subtype = makeValidator(rest, '$item');
+				types.push('array_reduce(' + varname + ', function ($carry, $item) {return $carry && ' + subtype + ';}, true)');
 			}
 			content = rest.slice(i+1); // everything behind the comma
 		}
-		return 'isset(' + varname + ') && ' + types.join(' && ');
-		// No *:type check (maybe TODO?)
+		return 'isset(' + varname + ') && is_array(' + varname + ') && ' + types.join(' && ');
 	}
 	// TODO: check for OR
 	throw new Error("Unknown type identifier: " + type);
