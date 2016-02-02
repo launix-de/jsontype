@@ -22,7 +22,7 @@ Syntax
 
 `{name: type, name: type}` - accepts only objects that have these properties with exactly these types<br/>
 `{name: type, * : undefined}` - accepts only objects that have no other properties than the named ones<br/>
-`{*: type}` - accepts only objects where all properties have the specified subtype (not supported in PHP, TODO?)<br/>
+`{*: type}` - accepts only objects where all properties have the specified subtype<br/>
 `{name?: type}` - accepts only objects that dont have this named property or the property has the specified type<br/>
 `{"name": type}` - accepts only objects which have this named property with exactly this type (be careful, the parser is not perfect)<br/>
 
