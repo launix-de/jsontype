@@ -28,6 +28,16 @@ Syntax
 
 Caution: Do not accept validation schemas from the user because they could harm you.
 
+Installing
+==========
+
+npm:
+```
+npm install jsontype
+```
+
+You can use jsontype for JavaScript via `var makeValidator = require('jsontype').makeValidator` or use it for PHP projects by calling `node node_modules/jsontype/jsontype2php ...` with your validators
+
 Using jsontype in JavaScript and Node.js
 ========================================
 
@@ -65,16 +75,6 @@ The function returns `true` if the value validates successfully.
 It is good practise to create all validators at startup and then just call the generated functions.
 If you want to have an exception thrown instead of a boolean return value, use `makeThrowValidator`.
 It will create functions that exit with `undefined` or throw an exception.
-
-Installing
-==========
-
-npm:
-```
-npm install jsontype
-```
-
-You can use jsontype for JavaScript via `var makeValidator = require('jsontype').makeValidator` or use it for PHP projects by calling `node node_modules/jsontype/jsontype2php ...` with your validators
 
 Using jsontype in PHP
 =====================
