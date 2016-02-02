@@ -66,14 +66,24 @@ It is good practise to create all validators at startup and then just call the g
 If you want to have an exception thrown instead of a boolean return value, use `makeThrowValidator`.
 It will create functions that exit with `undefined` or throw an exception.
 
+Installing
+==========
+
+npm:
+```
+npm install jsontype
+```
+
+You can use jsontype for JavaScript via `var makeValidator = require('jsontype').makeValidator` or use it for PHP projects by calling `node node_modules/jsontype/jsontype2php ...` with your validators
+
 Using jsontype in PHP
 =====================
 
 To use jsontype in PHP, e.g. to build JSON APIs, use `jsontype2php.js`
 
 Usage:
- - `node jsontype2php.js {username: string, password: string}` for creating a `function validate($x)`
- - `node jsontype2php.js $foo [mail]` for creating a inline PHP statement that validates `$foo`
+ - `node jsontype2php.js '{username: string, password: string}'` for creating a `function validate($x)`
+ - `node jsontype2php.js '$foo' '[mail]'` for creating a inline PHP statement that checks if `$foo` is a list of mail addresses
 
 Some remarks:
  - you might need single quotes on command line for escaping the string and double quotes for string literals inside the schema
